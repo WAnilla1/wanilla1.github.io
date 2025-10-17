@@ -26,7 +26,7 @@
       --acc-2:#a78bfa; /* violet-400 */
       --btn:#22d3ee;
       --btn-txt:#0b1222;
-      --ring: #38bdf8;
+      --ring:#38bdf8;
     }
 
     *{box-sizing:border-box}
@@ -43,11 +43,28 @@
       background-attachment: fixed;
     }
 
+    /* === שכבת רקע תמונה (מאחורי הכל) === */
+    .bg{
+      position:fixed;
+      inset:0;
+      z-index:0; /* מאחורי התוכן */
+      background-image: url('logo_resized_512x512.png'); /* <-- עדכני את הנתיב/שם הקובץ */
+      background-position:center;
+      background-repeat:no-repeat;
+      background-size:cover;
+      opacity:.18;          /* שקיפות עדינה */
+      filter: blur(2px);    /* טשטוש קל כך שלא יגנוב פוקוס */
+      transform: scale(1.02); /* קצת זום כדי שלא יראו את קצוות התמונה אחרי blur */
+      pointer-events:none;
+    }
+
     .wrap{
       min-height:100%;
       display:grid;
       place-items:center;
       padding:32px 16px;
+      position:relative;
+      z-index:1; /* מעל הרקע */
     }
 
     .card{
@@ -190,6 +207,9 @@
   </script>
 </head>
 <body>
+  <!-- שכבת רקע תמונה -->
+  <div class="bg" aria-hidden="true"></div>
+
   <main class="wrap">
     <section class="card" aria-labelledby="title">
       <span class="badge" aria-hidden="true"><span class="dot"></span> Support & Contact</span>
@@ -202,7 +222,6 @@
       <div class="cta">
         <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfEvAyQ2VIoFEBiTCtFbudw2_4by1yvLq8CMpWaySfiHeGAIA/viewform"
            target="_blank" rel="noopener noreferrer" aria-label="Open contact form">
-          <!-- simple icon -->
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"></path>
             <path d="M5 5h5V3H3v7h2V5z"></path>
@@ -232,7 +251,6 @@
   </main>
 
   <script>
-    // current year
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
